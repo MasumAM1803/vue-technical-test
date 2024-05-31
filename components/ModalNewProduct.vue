@@ -50,12 +50,12 @@ const product = ref({
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-48">
                             <div>
-                                <label for="category" class="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white">Category</label>
-                                <input v-model="product.category" type="category" name="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                <label for="price" class="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white">Price</label>
+                                <input v-model="product.price" type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                             </div>
                             <div>
-                                <label for="category" class="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white">Category</label>
-                                <input v-model="product.category" type="category" name="category" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                <label for="stock" class="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white">Stock</label>
+                                <input v-model="product.stock" type="number" name="stock" id="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                             </div>
                         </div>
                         <div class="flex items-center justify-end space-x-2 ">

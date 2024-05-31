@@ -12,6 +12,10 @@ const { products } = storeToRefs(store)
 
 await fetchProducts();
 
+const updateProduct = (id) => {
+    console.log(id)
+}
+
 const deleteProduct = (id) => {
     console.log(id)
 }
@@ -20,10 +24,10 @@ const deleteProduct = (id) => {
     <div>
         <!-- MODAL -->
         <ModalNewProduct />
-        <div v-for="product in products" :key="product.id">
-            <!-- MODAL -->
+        <!-- <div v-for="product in products" :key="product.id">
             <ModalUpdateProduct :id="product.id" />
-        </div>
+        </div> -->
+        <!-- <ModalDeleteProduct /> -->
 
         <h1 class="text-2xl font-semibold">Product</h1>
         <div class="flex justify-end mt-6">
@@ -78,7 +82,8 @@ const deleteProduct = (id) => {
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex">
-                                <button :data-modal-toggle="`update-product-modal-${product.id}`" :data-modal-target="`update-product-modal-${product.id}`" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</button>
+                                <!-- <button data-modal-toggle="update-product-modal" data-modal-target="update-product-modal" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</button> -->
+                                <a @click.prevent="updateProduct(product.id)" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</a>
                                 <a @click.prevent="deleteProduct(product.id)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                             </div>
                         </td>

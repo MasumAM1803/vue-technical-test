@@ -8,9 +8,14 @@ interface ProductPayloadInterface {
     stock: number;
 }
 
+interface IdPayloadInterface {
+    id: string;
+}
+
 export const useProductsStore = defineStore('products', {
     state: () => ({
         products: [],
+        product: {},
         status: false
     }),
     actions: {
@@ -18,6 +23,13 @@ export const useProductsStore = defineStore('products', {
             const { data }: any = await useFetch('https://dummyjson.com/products');
             if (data.value) {
                 this.products = data.value.products
+            }
+        },
+
+        async fetchProduct({ id }: IdPayloadInterface) {
+            const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`);
+            if (data.value) {
+                this.product = data.value
             }
         },
 
