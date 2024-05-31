@@ -11,14 +11,10 @@ const { fetchProducts } = store;
 const { products } = storeToRefs(store)
 
 await fetchProducts();
-// console.log(products.value)
 </script>
 <template>
     <div>
         <h1 class="text-2xl font-semibold">Product</h1>
-        <!-- <ul v-for="product in products" :key="product.id">
-            <li>{{ product.title }}</li>
-        </ul> -->
         <div class="flex justify-end mt-6">
             <button type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded text-sm px-4 py-2 text-center inline-flex items-center me-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
                 <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
