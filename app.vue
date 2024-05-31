@@ -9,7 +9,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="absolute flex justify-center items-center h-full w-full">
-      <NuxtPage />
+    <div>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
     </div>
 </template>
