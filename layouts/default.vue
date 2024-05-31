@@ -4,7 +4,7 @@ import { useAuthStore } from '~/store/auth';
 
 const { getUser, logoutUser} = useAuthStore();
 const { user, authenticated } = storeToRefs(useAuthStore());
-await getUser()
+await getUser();
 
 const router = useRouter();
 const logout = async () => {

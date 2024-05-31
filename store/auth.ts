@@ -31,7 +31,29 @@ export const useAuthStore = defineStore('auth', {
             }
         },
 
+        async refreshToken() {
+            const token = useCookie('token');
+            if (token) {
+                const { data }: any = await useFetch('https://dummyjson.com/auth/refresh', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token.value}`
+                    },
+                    body: {
+                        expiresInMins: 30,
+                    }
+                });
+
+                if (data.value) {
+                    const token = useCookie('token');
+                    token.value = data?.value?.token;
+                }
+            }
+        },
+
         async getUser() {
+            this.refreshToken();
             const token = useCookie('token');
             if (token) {
                 const { data }: any = await useFetch('https://dummyjson.com/auth/me', {

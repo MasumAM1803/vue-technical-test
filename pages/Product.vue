@@ -11,18 +11,30 @@ const { fetchProducts } = store;
 const { products } = storeToRefs(store)
 
 await fetchProducts();
+
+const deleteProduct = (id) => {
+    console.log(id)
+}
 </script>
 <template>
     <div>
+        <!-- MODAL -->
+        <ModalNewProduct />
+        <div v-for="product in products" :key="product.id">
+            <!-- MODAL -->
+            <ModalUpdateProduct :id="product.id" />
+        </div>
+
         <h1 class="text-2xl font-semibold">Product</h1>
         <div class="flex justify-end mt-6">
-            <button type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded text-sm px-4 py-2 text-center inline-flex items-center me-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+            <button data-modal-toggle="new-product-modal" data-modal-target="new-product-modal" type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded text-sm px-4 py-2 text-center inline-flex items-center me-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
                 <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                 </svg>
                 New product
             </button>
         </div>
+
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -65,11 +77,12 @@ await fetchProducts();
                             {{ product.stock }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</a>
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                            <div class="flex">
+                                <button :data-modal-toggle="`update-product-modal-${product.id}`" :data-modal-target="`update-product-modal-${product.id}`" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</button>
+                                <a @click.prevent="deleteProduct(product.id)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                            </div>
                         </td>
                     </tr>
-                    
                 </tbody>
             </table>
         </div>
