@@ -25,20 +25,20 @@ export const useAuthStore = defineStore('auth', {
             this.loading = pending;
 
             if (data.value) {
-                const token = useCookie('token');
-                token.value = data?.value?.token;
+                const accessToken = useCookie('accessToken');
+                accessToken.value = data?.value?.token;
                 this.authenticated = true;
             }
         },
 
         async refreshToken() {
-            const token = useCookie('token');
-            if (token) {
+            const accessToken = useCookie('accessToken');
+            if (accessToken) {
                 const { data }: any = await useFetch('https://dummyjson.com/auth/refresh', {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token.value}`
+                        'Authorization': `Bearer ${accessToken.value}`
                     },
                     body: {
                         expiresInMins: 30,
@@ -46,25 +46,28 @@ export const useAuthStore = defineStore('auth', {
                 });
 
                 if (data.value) {
-                    const token = useCookie('token');
-                    token.value = data?.value?.token;
+                    return data?.value?.token;
                 }
             }
         },
 
         async getUser() {
-            this.refreshToken();
-            const token = useCookie('token');
-            if (token) {
+            const accessToken = useCookie('accessToken');
+            if (accessToken) {
                 const { data }: any = await useFetch('https://dummyjson.com/auth/me', {
                     method: 'GET',
                     headers: { 
-                        'Authorization': `Bearer ${token.value}`
+                        'Authorization': `Bearer ${accessToken.value}`
                     },
                 });
 
                 if (data.value) {
                     this.user = data?.value;
+                } 
+
+                if (!data.value) {
+                    const newToken = await this.refreshToken()
+                    accessToken.value = newToken;
                 }
             }
         },

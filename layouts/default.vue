@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 
-const { getUser, logoutUser} = useAuthStore();
+const { getUser, refreshToken, logoutUser} = useAuthStore();
 const { user, authenticated } = storeToRefs(useAuthStore());
 await getUser();
 
@@ -12,6 +12,9 @@ const logout = async () => {
     if (authenticated.value === false) {
         router.push('/login');
     }
+}
+if (user === null) {
+    await refreshToken();
 }
 </script>
 
@@ -29,7 +32,7 @@ const logout = async () => {
                         </button>
                         <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white ms-2 md:me-24">Vue Technical Test</span>
                     </div>
-                    <div class="flex items-center">
+                    <div v-if="user !== null" class="flex items-center">
                         <div class="flex items-center ms-3">
                             <div>
                             <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
