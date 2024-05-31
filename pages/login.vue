@@ -3,9 +3,6 @@ definePageMeta({
     middleware: 'auth'
 })
 </script>
-
 <template>
-    <div>
-        <h1>HOME</h1>
-    </div>
+    <LoginCard />
 </template>
