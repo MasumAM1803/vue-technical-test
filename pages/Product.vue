@@ -11,7 +11,7 @@ const { fetchProducts } = store;
 const { products } = storeToRefs(store)
 
 await fetchProducts();
-console.log(products.value)
+// console.log(products.value)
 </script>
 <template>
     <div>

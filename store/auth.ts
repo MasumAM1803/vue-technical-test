@@ -9,13 +9,12 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
         loading: false,
+        user: null,
     }),
     actions: {
         async authenticateUser({ username, password }: UserPayloadInterface) {
-            console.log(username)
-            console.log(password)
             const { data, pending }: any = await useFetch('https://dummyjson.com/auth/login', {
-                method: 'post',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: {
                     username,
@@ -29,6 +28,22 @@ export const useAuthStore = defineStore('auth', {
                 const token = useCookie('token');
                 token.value = data?.value?.token;
                 this.authenticated = true;
+            }
+        },
+
+        async getUser() {
+            const token = useCookie('token');
+            if (token) {
+                const { data }: any = await useFetch('https://dummyjson.com/auth/me', {
+                    method: 'GET',
+                    headers: { 
+                        'Authorization': `Bearer ${token.value}`
+                    },
+                });
+
+                if (data.value) {
+                    this.user = data?.value;
+                }
             }
         },
 
