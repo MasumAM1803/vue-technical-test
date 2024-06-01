@@ -43,7 +43,7 @@ const items = [
                         </button>
                         <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white ms-2 md:me-24">Vue Technical Test</span>
                     </div>
-                    <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start'}">
+                    <UDropdown v-if="user !== null" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start'}">
                         <UAvatar :src="user.image" />
 
                         <template #account="{ item }">

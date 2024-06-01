@@ -20,7 +20,7 @@ const login = async () => {
 }
 </script>
 <template>
-    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 mx-4 md:mx-0 dark:bg-gray-800 dark:border-gray-700">
         <div class="space-y-6 form">
             <div class="flex justify-center">
                 <img src="/img/mam-logo.png" alt="Logo Apps" class="w-[80px]"/>
