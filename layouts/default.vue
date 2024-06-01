@@ -16,6 +16,17 @@ const logout = async () => {
 if (user === null) {
     await refreshToken();
 }
+
+const items = [
+  [{
+    slot: 'account',
+    disabled: true
+  }], [{
+    label: 'Sign out',
+    icon: 'i-heroicons-arrow-left-on-rectangle',
+    click: () => {logout()}
+  }]
+]
 </script>
 
 <template>
@@ -32,31 +43,25 @@ if (user === null) {
                         </button>
                         <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white ms-2 md:me-24">Vue Technical Test</span>
                     </div>
-                    <div v-if="user !== null" class="flex items-center">
-                        <div class="flex items-center ms-3">
-                            <div>
-                            <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full" :src=user.image alt="user photo">
-                            </button>
-                            </div>
-                            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                            <div class="px-4 py-3" role="none">
-                                <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    {{ user.firstName }} {{ user.lastName }}
-                                </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                    {{ user.email }}
-                                </p>
-                            </div>
-                            <ul class="py-1" role="none">
-                                <li>
-                                    <a @click.prevent="logout" class="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
-                                </li>
-                            </ul>
-                            </div>
+                    <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start'}">
+                        <UAvatar :src="user.image" />
+
+                        <template #account="{ item }">
+                        <div class="text-left max-w-full">
+                            <p>
+                                {{ user.firstName }} {{ user.lastName }}
+                            </p>
+                            <p class="font-medium text-gray-900 dark:text-white break-words">
+                                {{ user.email }}
+                            </p>
                         </div>
-                    </div>
+                        </template>
+
+                        <template #item="{ item }">
+                        <span class="truncate">{{ item.label }}</span>
+                        <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+                        </template>
+                    </UDropdown>
                 </div>
             </div>
         </nav>
