@@ -27,13 +27,15 @@ const update = async () => {
     if (status) {
         alert('Update Product Successfully')
         modal.close()
+    } else {
+        alert('Update Product Failed')
+        modal.close()
     }
 }
 
 const closeModal = () => {
     modal.close()
 }
-// console.log(props.product)
 </script>
 
 <template>

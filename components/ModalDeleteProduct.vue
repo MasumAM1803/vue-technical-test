@@ -24,7 +24,10 @@ const productId = ref({
 const confirm = async () => {
     await deleteProduct(productId.value)
     if (isDeleted) {
-        alert('Deleted Product Successfully')
+        alert('Delete Product Successfully')
+        modal.close()
+    } else {
+        alert('Delete Product Failed')
         modal.close()
     }
 }
