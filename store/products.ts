@@ -1,15 +1,12 @@
 import { defineStore } from "pinia";
 
 interface ProductPayloadInterface {
+    id: number,
     title: string;
     description: string;
     category: string;
     price: number;
     stock: number;
-}
-
-interface IdPayloadInterface {
-    id: string;
 }
 
 export const useProductsStore = defineStore('products', {
@@ -28,7 +25,7 @@ export const useProductsStore = defineStore('products', {
             }
         },
 
-        async fetchProduct({ id }: IdPayloadInterface) {
+        async fetchProduct({ id }: ProductPayloadInterface) {
             const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`);
             if (data.value) {
                 this.product = data.value
@@ -54,8 +51,8 @@ export const useProductsStore = defineStore('products', {
             }
         },
 
-        async updateProduct({ title, description, category, price, stock }: ProductPayloadInterface) {
-            const { data }: any = await useFetch('https://dummyjson.com/products/add', {
+        async updateProduct({ id, title, description, category, price, stock }: ProductPayloadInterface) {
+            const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: {
@@ -72,7 +69,7 @@ export const useProductsStore = defineStore('products', {
             }
         },
 
-        async deleteProduct({ id }: IdPayloadInterface) {
+        async deleteProduct({ id }: ProductPayloadInterface) {
             const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`, {
                 method: 'DELETE',
             });

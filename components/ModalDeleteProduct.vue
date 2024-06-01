@@ -21,8 +21,6 @@ const productId = ref({
     title: props.title,
 })
 
-
-const router = useRouter();
 const confirm = async () => {
     await deleteProduct(productId.value)
     if (isDeleted) {
@@ -34,8 +32,6 @@ const confirm = async () => {
 const closeModal = () => {
     modal.close()
 }
-
-// console.log(product.value)
 </script>
 
 <template>

@@ -3,7 +3,7 @@ definePageMeta({
     middleware: 'auth'
 })
 
-import { ModalDeleteProduct } from '#components';
+import { ModalDeleteProduct, ModalUpdateProduct } from '#components';
 import { storeToRefs } from 'pinia'
 import { useProductsStore } from '~/store/products';
 
@@ -14,13 +14,13 @@ const { products } = storeToRefs(store)
 await fetchProducts();
 
 const modal = useModal()
-const product = ref({
-    id: 0,
-    title: 0,
-})
+const product = ref({})
 
-const updateProduct = (id) => {
-    console.log(id)
+const updateProduct = (productData: any) => {
+    product.value = productData
+    modal.open(ModalUpdateProduct, {
+        product: product.value,
+    })
 }
 
 const deleteProduct = (productData: any) => {
@@ -91,7 +91,7 @@ const deleteProduct = (productData: any) => {
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex">
-                                <UButton label="Edit" @click.prevent="updateProduct(product.id)" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6 px-0 py-0 bg-transparent outline-none border-none shadow-none hover:bg-transparent hover:shadow-none" />
+                                <UButton label="Edit" @click.prevent="updateProduct(product)" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6 px-0 py-0 bg-transparent outline-none border-none shadow-none hover:bg-transparent hover:shadow-none" />
                                 <UButton label="Delete" @click="deleteProduct(product)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline px-0 py-0 bg-transparent outline-none border-none shadow-none hover:bg-transparent hover:shadow-none" />
                             </div>
                         </td>
