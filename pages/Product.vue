@@ -3,7 +3,7 @@ definePageMeta({
     middleware: 'auth'
 })
 
-import { ModalDeleteProduct, ModalNewProduct, ModalUpdateProduct } from '#components';
+import { ModalDelete, ModalProduct } from '#components';
 import { storeToRefs } from 'pinia'
 import { useProductsStore } from '~/store/products';
 
@@ -17,12 +17,15 @@ const modal = useModal()
 const product = ref({})
 
 const addProduct = () => {
-    modal.open(ModalNewProduct)
+    modal.open(ModalProduct, {
+        modalId: 1
+    })
 }
 
 const updateProduct = (productData: any) => {
     product.value = productData
-    modal.open(ModalUpdateProduct, {
+    modal.open(ModalProduct, {
+        modalId: 2,
         product: product.value,
     })
 }
@@ -30,7 +33,7 @@ const updateProduct = (productData: any) => {
 const deleteProduct = (productData: any) => {
     product.value.id = productData.id
     product.value.title = productData.title
-    modal.open(ModalDeleteProduct, {
+    modal.open(ModalDelete, {
         id: product.value.id,
         title: product.value.title,
     })

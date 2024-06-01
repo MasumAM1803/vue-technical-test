@@ -5,5 +5,5 @@ definePageMeta({
 })
 </script>
 <template>
-    <LoginCard />
+    <CardDefault type="login" /> 
 </template>

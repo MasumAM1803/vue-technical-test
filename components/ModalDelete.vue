@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ModalDeleteProduct } from '#components';
 import { storeToRefs } from 'pinia';
 import { useProductsStore } from '~/store/products';
 
