@@ -69,9 +69,9 @@ export const useAuthStore = defineStore('auth', {
         },
 
         logoutUser() {
-            const token = useCookie('token');
+            const accessToken = useCookie('accessToken');
             this.authenticated = false;
-            token.value = null;
+            accessToken.value = null;
         }
     }
 })

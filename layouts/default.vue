@@ -89,5 +89,7 @@ if (user === null) {
                 <slot />
             </div>
         </div>
+        
+        <UModals />
     </div>
   </template>
