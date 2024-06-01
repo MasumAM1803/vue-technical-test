@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+
+onMounted(() => {
+    initFlowbite();
+})
+
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 
