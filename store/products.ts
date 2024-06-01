@@ -16,6 +16,8 @@ export const useProductsStore = defineStore('products', {
     state: () => ({
         products: [],
         product: {},
+        title: '',
+        isDeleted: false,
         status: false
     }),
     actions: {
@@ -45,9 +47,38 @@ export const useProductsStore = defineStore('products', {
                     stock,
                 }
             });
+            
+            if (data.value) {
+                this.title = data.value.title;
+                this.status = true;
+            }
+        },
+
+        async updateProduct({ title, description, category, price, stock }: ProductPayloadInterface) {
+            const { data }: any = await useFetch('https://dummyjson.com/products/add', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: {
+                    title,
+                    description,
+                    category,
+                    price,
+                    stock,
+                }
+            });
 
             if (data.value) {
                 this.status = true
+            }
+        },
+
+        async deleteProduct({ id }: IdPayloadInterface) {
+            const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (data.value) {
+                this.isDeleted = data.value.isDeleted
             }
         },
     }

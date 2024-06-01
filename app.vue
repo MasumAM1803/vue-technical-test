@@ -11,7 +11,11 @@ onMounted(() => {
 <template>
     <div>
       <NuxtLayout>
-        <NuxtPage />
+        <UContainer>
+          <NuxtPage />
+        </UContainer>
+        
+        <UModals />
       </NuxtLayout>
     </div>
 </template>

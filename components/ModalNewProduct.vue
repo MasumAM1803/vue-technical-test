@@ -1,10 +1,9 @@
 <script setup lang="ts">
-// const props = defineProps(['testing'])
-// import { storeToRefs } from 'pinia';
-// import { useAuthStore } from '~/store/auth';
+import { storeToRefs } from 'pinia';
+import { useProductsStore } from '~/store/products';
 
-// const { authenticateUser } = useAuthStore();
-// const { authenticated } = storeToRefs(useAuthStore());
+const { storeProduct } = useProductsStore();
+const { status, title } = storeToRefs(useProductsStore());
 
 const product = ref({
     title: '',
@@ -13,16 +12,18 @@ const product = ref({
     price: 0,
     stock: 0,
 })
-// const router = useRouter();
+const router = useRouter();
 
-// const login = async () => {
-//     await authenticateUser(user.value)
-//     if (authenticated) {
-//         router.push('/product');
-//     }
-// }
-
-// console.log(props.testing)
+const submit = async () => {
+    await storeProduct(product.value)
+    if (status) {
+        alert(`Add Product "${title.value}" Successfully`)
+        location.reload();
+    } else {
+        alert('Add Product Failed')
+        location.reload();
+    }
+}
 </script>
 
 <template>
@@ -60,7 +61,7 @@ const product = ref({
                         </div>
                         <div class="flex items-center justify-end space-x-2 ">
                             <button data-modal-hide="new-product-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 min-w-[80px]">Cancel</button>
-                            <button type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 min-w-[80px]">Save</button>
+                            <button @click.prevent="submit()" type="button" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 min-w-[80px]">Save</button>
                         </div>
                     </div>
                 </div>

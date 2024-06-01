@@ -3,6 +3,7 @@ definePageMeta({
     middleware: 'auth'
 })
 
+import { ModalDeleteProduct } from '#components';
 import { storeToRefs } from 'pinia'
 import { useProductsStore } from '~/store/products';
 
@@ -12,22 +13,30 @@ const { products } = storeToRefs(store)
 
 await fetchProducts();
 
+const modal = useModal()
+const product = ref({
+    id: 0,
+    title: 0,
+})
+
 const updateProduct = (id) => {
     console.log(id)
 }
 
-const deleteProduct = (id) => {
-    console.log(id)
+const deleteProduct = (productData: any) => {
+    product.value.id = productData.id
+    product.value.title = productData.title
+    modal.open(ModalDeleteProduct, {
+        id: product.value.id,
+        title: product.value.title,
+    })
 }
+
 </script>
 <template>
     <div>
         <!-- MODAL -->
         <ModalNewProduct />
-        <!-- <div v-for="product in products" :key="product.id">
-            <ModalUpdateProduct :id="product.id" />
-        </div> -->
-        <!-- <ModalDeleteProduct /> -->
 
         <h1 class="text-2xl font-semibold">Product</h1>
         <div class="flex justify-end mt-6">
@@ -82,9 +91,8 @@ const deleteProduct = (id) => {
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex">
-                                <!-- <button data-modal-toggle="update-product-modal" data-modal-target="update-product-modal" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</button> -->
-                                <a @click.prevent="updateProduct(product.id)" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6">Edit</a>
-                                <a @click.prevent="deleteProduct(product.id)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                <UButton label="Edit" @click.prevent="updateProduct(product.id)" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline me-6 px-0 py-0 bg-transparent outline-none border-none shadow-none hover:bg-transparent hover:shadow-none" />
+                                <UButton label="Delete" @click="deleteProduct(product)" class="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline px-0 py-0 bg-transparent outline-none border-none shadow-none hover:bg-transparent hover:shadow-none" />
                             </div>
                         </td>
                     </tr>

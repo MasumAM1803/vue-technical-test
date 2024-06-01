@@ -33,6 +33,7 @@ export const useAuthStore = defineStore('auth', {
 
         async refreshToken() {
             const accessToken = useCookie('accessToken');
+            console.log(accessToken)
             if (accessToken) {
                 const { data }: any = await useFetch('https://dummyjson.com/auth/refresh', {
                     method: 'POST',
@@ -64,11 +65,6 @@ export const useAuthStore = defineStore('auth', {
                 if (data.value) {
                     this.user = data?.value;
                 } 
-
-                if (!data.value) {
-                    const newToken = await this.refreshToken()
-                    accessToken.value = newToken;
-                }
             }
         },
 
