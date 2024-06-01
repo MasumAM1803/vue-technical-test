@@ -13,7 +13,6 @@ const product = ref({
     price: 0,
     stock: 0,
 })
-const router = useRouter();
 
 const submit = async () => {
     await storeProduct(product.value)

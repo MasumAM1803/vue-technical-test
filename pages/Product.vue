@@ -35,7 +35,6 @@ const deleteProduct = (productData: any) => {
         title: product.value.title,
     })
 }
-
 </script>
 <template>
     <div>
