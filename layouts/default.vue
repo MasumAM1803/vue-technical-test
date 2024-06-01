@@ -13,6 +13,9 @@ const { getUser, refreshToken, logoutUser} = useAuthStore();
 const { user, authenticated } = storeToRefs(useAuthStore());
 await getUser();
 
+const dataUser = ref();
+dataUser.value = user.value;
+
 const router = useRouter();
 const logout = async () => {
     await logoutUser();
@@ -51,15 +54,15 @@ const items = [
                         <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white ms-2 md:me-24">Vue Technical Test</span>
                     </div>
                     <UDropdown v-if="user !== null" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start'}">
-                        <UAvatar :src="user.image" />
+                        <UAvatar :src="dataUser.image" />
 
-                        <template #account="{ item }">
+                        <template #account>
                         <div class="text-left max-w-full">
                             <p>
-                                {{ user.firstName }} {{ user.lastName }}
+                                {{ dataUser.firstName }} {{ dataUser.lastName }}
                             </p>
                             <p class="font-medium text-gray-900 dark:text-white break-words">
-                                {{ user.email }}
+                                {{ dataUser.email }}
                             </p>
                         </div>
                         </template>

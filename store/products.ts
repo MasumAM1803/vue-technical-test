@@ -69,7 +69,7 @@ export const useProductsStore = defineStore('products', {
             }
         },
 
-        async deleteProduct({ id }: ProductPayloadInterface) {
+        async deleteProduct({ id }: any) {
             const { data }: any = await useFetch(`https://dummyjson.com/products/${id}`, {
                 method: 'DELETE',
             });

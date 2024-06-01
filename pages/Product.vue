@@ -14,7 +14,9 @@ const { products } = storeToRefs(store)
 await fetchProducts();
 
 const modal = useModal()
-const product = ref({})
+const dataProducts = ref()
+const product = ref()
+dataProducts.value = products.value;
 
 const addProduct = () => {
     modal.open(ModalProduct, {
@@ -76,7 +78,7 @@ const deleteProduct = (productData: any) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="product in products" :key="product.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr v-for="product in dataProducts" :key="product.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900  dark:text-white">
                             {{ product.title }}
                         </th>

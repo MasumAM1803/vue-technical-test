@@ -33,7 +33,7 @@ console.log(props.type)
             <div class="flex justify-center">
                 <img src="/img/mam-logo.png" alt="Logo Apps" class="w-[80px]"/>
             </div>
-            <h5 class="text-2xl font-medium capitalize text-center font-bold text-gray-900 dark:text-white">Vue Technical Test</h5>
+            <h5 class="text-2xl capitalize text-center font-bold text-gray-900 dark:text-white">Vue Technical Test</h5>
             <div>
                 <label for="username" class="block mb-2 text-sm font-medium capitalize text-gray-900 dark:text-white">username</label>
                 <input v-model="user.username" type="username" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="username" required />
