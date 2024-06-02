@@ -24,7 +24,6 @@ const login = async () => {
         router.push('/');
     }
 }
-console.log(props.type)
 </script>
 
 <template>

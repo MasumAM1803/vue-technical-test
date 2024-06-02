@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+import { initFlowbite } from 'flowbite'
+
+onMounted(() => {
+    initFlowbite();
+})
+
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 
@@ -31,13 +37,6 @@ const items = [
     click: () => {logout()}
   }]
 ]
-
-const isOpen = ref(true);
-
-const openModal = () => {
-    modal(isOpen)
-}
-
 </script>
 
 <template>
@@ -45,8 +44,8 @@ const openModal = () => {
         <nav class="fixed top-0 z-50 md:z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
-                    <div id="topnav-right-side" class="sm:ms-64 flex items-center justify-start rtl:justify-end">
-                        <button @click="openModal()" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <div class="md:ms-64 flex items-center justify-start rtl:justify-end">
+                        <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="sm:hidden inline-flex items-center p-2 text-sm text-gray-500 rounded-lg  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <span class="sr-only">Open sidebar</span>
                             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
@@ -85,7 +84,7 @@ const openModal = () => {
                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z" clip-rule="evenodd"/>
                             </svg>
-                            <span id="sidebar-menu-home" class="ms-3">Home</span>
+                            <span class="ms-3">Home</span>
                         </NuxtLink>
                     </li>
                     <li>
@@ -93,7 +92,7 @@ const openModal = () => {
                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 8H4m0-2v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-5.032a1 1 0 0 1-.768-.36l-1.9-2.28a1 1 0 0 0-.768-.36H5a1 1 0 0 0-1 1Z"/>
                             </svg>
-                            <span id="sidebar-menu-product" class="flex-1 ms-3 whitespace-nowrap">Product</span>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Product</span>
                         </NuxtLink>
                     </li>
                 </ul>
@@ -107,7 +106,5 @@ const openModal = () => {
         </div>
         
         <UModals />
-
-        <div id="drawer-backdrop" class="hidden bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-30"></div>
     </div>
   </template>
