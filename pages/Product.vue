@@ -15,7 +15,6 @@ await fetchProducts();
 
 const modal = useModal()
 const dataProducts = ref()
-const product = ref()
 dataProducts.value = products.value;
 
 const addProduct = () => {
@@ -25,19 +24,16 @@ const addProduct = () => {
 }
 
 const updateProduct = (productData: any) => {
-    product.value = productData
     modal.open(ModalProduct, {
         modalId: 2,
-        product: product.value,
+        product: productData,
     })
 }
 
 const deleteProduct = (productData: any) => {
-    product.value.id = productData.id
-    product.value.title = productData.title
     modal.open(ModalDelete, {
-        id: product.value.id,
-        title: product.value.title,
+        id: productData.id,
+        title: productData.title,
     })
 }
 </script>
