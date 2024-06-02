@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 
@@ -17,9 +16,12 @@ const logout = async () => {
         router.push('/login');
     }
 }
-if (user === null) {
-    await refreshToken();
-}
+
+onMounted(() => {
+    setInterval(async () => {
+        await refreshToken();
+    }, 1740000) // every 29 minutes refresh token
+})
 
 const items = [
   [{

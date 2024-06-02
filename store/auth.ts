@@ -19,7 +19,7 @@ export const useAuthStore = defineStore('auth', {
                 body: {
                     username,
                     password,
-                    expiresInMins: 30,
+                    expiresInMins: 30 * 60,
                 }
             });
             this.loading = pending;
@@ -41,12 +41,13 @@ export const useAuthStore = defineStore('auth', {
                         'Authorization': `Bearer ${accessToken.value}`
                     },
                     body: {
-                        expiresInMins: 30,
+                        expiresInMins: 30 * 60,
                     }
                 });
 
                 if (data.value) {
-                    return data?.value?.token;
+                    const accessToken = useCookie('accessToken');
+                    accessToken.value = data?.value?.token;
                 }
             }
         },
